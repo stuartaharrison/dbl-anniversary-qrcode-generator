@@ -26,9 +26,9 @@ const QRCodeForm = () => {
             codes.push(playerThree);
         }
 
-        // if (codes.length === 0) {
-        //     return;
-        // }
+        if (codes.length === 0) {
+            return;
+        }
 
         generatePlayerCodes({ friendCodes: codes }).unwrap();
     };

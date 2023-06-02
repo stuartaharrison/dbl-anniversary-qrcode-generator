@@ -1,6 +1,8 @@
 # Dragonball Legends - Anniversary QRCode Generator
 Don't have any friends or friends who play the game? Tired of trying to swap screenshots on Reddit & Discord? Well introducing the Web Application for generating QRCodes! Simply grab some Friend Codes from your current friends list and input them into the text fields available. Click generate and then scan each code into the game.
 
+> Please note that currently this is not confirmed to work with 5th Anniversary - largely down to my own personal and work commitments means I cannot spend time working on this. The demo site will also remain down until I can fix the current issues. **There are other alternatives to this repo as others have also built QR Code generators**
+
 **This version DOES work with the 4th Anniversay event.**
 
 Demo/Online version for those not looking to run their own is available [here.](https://dblegends.harrisonhomenetwork.co.uk/)

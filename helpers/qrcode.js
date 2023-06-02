@@ -1,8 +1,8 @@
 const QRCode = require('qrcode');
-const { encodeTimestamp } = require('./encrypter');
+const { encodeTimestamp, encodeString, encryptionWheel } = require('./encrypter');
 
-const generateQrCode = async (friendCode, timestamp) => {
-    let data = generateQrCodeData(friendCode, timestamp);
+const generateQrCode = async (friendCode, timestamp, wheel = encryptionWheel) => {
+    let data = generateQrCodeData(friendCode, timestamp, wheel);
     let qrCodeImage = await QRCode.toDataURL(data);
 
     return {
@@ -12,9 +12,12 @@ const generateQrCode = async (friendCode, timestamp) => {
     };
 };
 
-const generateQrCodeData = (friendCode, timestamp) => {
-    let timestampEncoded = encodeTimestamp(timestamp);
-    return `4,${friendCode},${timestampEncoded}`;
+const generateQrCodeData = (friendCode, timestamp, wheel = encryptionWheel) => {
+    let timestampEncoded = typeof(timestamp) === 'string'
+        ? encodeString(timestamp, wheel)
+        : encodeTimestamp(timestamp, wheel);
+        
+    return `4,${friendCode}${timestampEncoded}`;
 };
 
 module.exports = {

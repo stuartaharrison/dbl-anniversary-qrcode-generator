@@ -1,4 +1,22 @@
 const encryptionWheel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'];
+const fifthAnniversaryEncryptionWheel = {
+    0: 'B',
+    1: 'C',
+    2: 'D',
+    3: 'E',
+    4: 'F',
+    5: 'G',
+    6: 'H',
+    7: 'J',
+    8: 'K',
+    9: 'M',
+    a: 'N',
+    b: 'P',
+    c: 'Q',
+    d: 'R',
+    e: 'S',
+    f: 'T'
+};
 
 const decodeTimestamp = (encodedValue, wheel = encryptionWheel) => {
     let decodedValue = "";
@@ -11,22 +29,31 @@ const decodeTimestamp = (encodedValue, wheel = encryptionWheel) => {
     return decodedValue;
 };
 
-const encodeTimestamp = (timestamp, wheel = encryptionWheel) => {
+const encodeString = (value, wheel) => {
     let encodedValue = "";
-    let timestampStr = timestamp.toString();
-    
+    if (!wheel) {
+        return encodedValue;
+    }
 
-    for (var i = 0; i < timestampStr.length; i++) {
-        let decodePosition = parseInt(timestampStr.charAt(i));
-        let encodedChar = wheel[decodePosition];
-
+    for (var i = 0; i < value.length; i++) {
+        let encodedChar = Array.isArray(wheel)
+            ? wheel[parseInt(value.charAt(i))]
+            : wheel[value[i]];
         encodedValue = encodedValue.concat(encodedChar);
     }
     
     return encodedValue;
 };
 
+const encodeTimestamp = (timestamp, wheel = encryptionWheel) => {
+    let timestampStr = timestamp.toString();
+    return encodeString(timestampStr, wheel);
+};
+
 module.exports = {
     decodeTimestamp,
-    encodeTimestamp
+    encodeString,
+    encodeTimestamp,
+    encryptionWheel,
+    fifthAnniversaryEncryptionWheel
 };
